@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import 'highlight.js/styles/github-dark.css';
+
+/* Cloudflare DARK theme — true brand colors, neutral grays */
+:root {
+  --bg-1: #0E1014;          /* page background (near-black, slight cool neutral) */
+  --bg-2: #16181D;          /* cards / panels */
+  --bg-3: #1D2026;          /* hovered / tertiary */
+  --bg-soft: #131519;
+  --border-1: #23262C;      /* primary border */
+  --border-2: #2D3138;      /* hovered border */
+  --text-1: #FFFFFF;        /* primary text */
+  --text-2: #B7BDC6;        /* secondary text (CF docs body color) */
+  --text-3: #8A929E;        /* muted */
+  --accent: #F38020;        /* Cloudflare brand orange */
+  --accent-hover: #FF9E45;
+  --accent-soft: rgba(243, 128, 32, 0.10);
+  --accent-border: rgba(243, 128, 32, 0.28);
+  --code-bg: #0B0D11;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-1);
+  background: var(--bg-1);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+code, pre { font-family: 'JetBrains Mono', Menlo, Monaco, Consolas, monospace; }
+.font-display { font-family: 'Inter', sans-serif; }
+.font-body { font-family: 'Inter', sans-serif; }
+.font-mono { font-family: 'JetBrains Mono', monospace; }
+
+::selection { background: var(--accent-soft); color: var(--text-1); }
+
+@layer base {
+  :root {
+    --background: 222 17% 7%;
+    --foreground: 0 0% 100%;
+    --card: 222 12% 11%;
+    --card-foreground: 0 0% 100%;
+    --popover: 222 12% 11%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 26 90% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222 10% 14%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 222 10% 14%;
+    --muted-foreground: 217 11% 58%;
+    --accent: 26 90% 54%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 222 10% 17%;
+    --input: 222 10% 17%;
+    --ring: 26 90% 54%;
+    --radius: 0.25rem;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; }
+}
+
+/* Subtle grid (lower contrast for Cloudflare feel) */
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 65% 55% at 50% 0%, black 35%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse 65% 55% at 50% 0%, black 35%, transparent 90%);
+}
+
+/* Subtle orange glow */
+.hero-glow {
+  position: absolute;
+  inset: -10% -10% auto -10%;
+  height: 70%;
+  background: radial-gradient(ellipse 40% 55% at 15% 25%, rgba(243,128,32,0.10), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.nav-link { position: relative; font-weight: 500; }
+.nav-link::after {
+  content: ''; position: absolute; left: 0; bottom: -22px;
+  width: 0; height: 2px; background: var(--accent);
+  transition: width 0.2s ease;
+}
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+/* Prose styling — Cloudflare docs feel */
+.prose-content { color: var(--text-2); font-size: 1rem; line-height: 1.7; }
+.prose-content h1 { font-weight: 700; font-size: 2rem; color: var(--text-1); margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
+.prose-content h2 { font-weight: 700; font-size: 1.625rem; color: var(--text-1); margin: 2.25rem 0 0.75rem; letter-spacing: -0.015em; border-bottom: 1px solid var(--border-1); padding-bottom: 0.5rem; }
+.prose-content h3 { font-weight: 600; font-size: 1.25rem; color: var(--text-1); margin: 1.75rem 0 0.5rem; }
+.prose-content h4 { font-weight: 600; font-size: 1.0625rem; color: var(--text-1); margin: 1.5rem 0 0.5rem; }
+.prose-content p { margin: 0.95rem 0; }
+.prose-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+.prose-content a:hover { border-bottom-color: var(--accent); }
+.prose-content ul, .prose-content ol { padding-left: 1.5rem; margin: 1rem 0; }
+.prose-content ul { list-style: disc; }
+.prose-content ol { list-style: decimal; }
+.prose-content li { margin: 0.375rem 0; }
+.prose-content blockquote { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 0.75rem 1.25rem; margin: 1.25rem 0; color: var(--text-2); border-radius: 2px; font-style: normal; }
+.prose-content blockquote p { margin: 0; }
+.prose-content img { border-radius: 4px; margin: 1.5rem 0; max-width: 100%; border: 1px solid var(--border-1); }
+.prose-content hr { margin: 2rem 0; border: none; border-top: 1px solid var(--border-1); }
+.prose-content strong { color: var(--text-1); font-weight: 600; }
+.prose-content code:not(pre code) {
+  background: var(--bg-3);
+  color: #FFC79A;
+  padding: 0.125rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.875em;
+  border: 1px solid var(--border-1);
+}
+.prose-content pre {
+  background: var(--code-bg) !important;
+  color: #E6E6E6;
+  padding: 1rem 1.25rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 1.25rem 0;
+  position: relative;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  border: 1px solid var(--border-1);
+}
+.prose-content pre code { background: transparent !important; color: inherit; padding: 0; border: 0; font-size: inherit; }
+.prose-content table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.95rem; }
+.prose-content th, .prose-content td { border: 1px solid var(--border-1); padding: 0.5rem 0.75rem; text-align: left; }
+.prose-content th { background: var(--bg-2); font-weight: 600; color: var(--text-1); }
+
+/* Copy button */
+.code-block-wrapper { position: relative; }
+.code-block-wrapper .copy-btn {
+  position: absolute; top: 8px; right: 8px;
+  background: rgba(35, 38, 44, 0.85); color: #B7BDC6;
+  border: 1px solid var(--border-2); padding: 4px 9px;
+  border-radius: 3px; font-size: 11px; font-weight: 500;
+  cursor: pointer; font-family: 'Inter', sans-serif;
+  transition: all 0.15s; display: inline-flex; align-items: center; gap: 4px;
+}
+.code-block-wrapper .copy-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+input, textarea, select { color-scheme: dark; }
+
+@layer base {
+  [data-debug-wrapper="true"] { display: contents !important; }
+}
