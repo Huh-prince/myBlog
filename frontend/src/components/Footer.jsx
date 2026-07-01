@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { Rss, Github, Mail, KeyRound, Lock } from "lucide-react";
+import { useAuth } from "../lib/auth";
 
 export default function Footer() {
+  const { user } = useAuth();
+
   return (
     <footer data-testid="site-footer" className="bg-[#0E1014] border-t border-[var(--border-1)] mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
@@ -20,11 +23,13 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li><Link to="/posts" className="text-slate-400 hover:text-[#F38020]">All posts</Link></li>
               <li><Link to="/tags" className="text-slate-400 hover:text-[#F38020]">Topics</Link></li>
-              <li>
-                <Link data-testid="footer-signin-link" to="/login" className="inline-flex items-center gap-1.5 text-slate-400 hover:text-[#F38020]">
-                   Admin
-                </Link>
-              </li>
+              {!user && (
+                <li>
+                  <Link data-testid="footer-signin-link" to="/login" className="inline-flex items-center gap-1.5 text-slate-400 hover:text-[#F38020]">
+                     Admin
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
 
